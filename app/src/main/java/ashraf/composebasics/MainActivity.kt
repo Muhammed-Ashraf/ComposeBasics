@@ -3,15 +3,12 @@ package ashraf.composebasics
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material.Icon
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import ashraf.composebasics.ui.theme.ComposeBasicsTheme
 
 class MainActivity : ComponentActivity() {
@@ -33,14 +30,12 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(name: String) {
-    Text(
-        text = "Hello $name!",
-        color = Color.Blue,
-        fontSize = 30.sp,
-        modifier = Modifier
-            .background(Color.Red)
-            .padding(30.dp)
-    )
+    Column() {
+        for (i in 1..10)
+            Icon(imageVector = Icons.Default.Add, contentDescription = null)
+    }
+
+
 }
 
 @Preview(showBackground = true)
