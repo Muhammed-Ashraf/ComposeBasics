@@ -1,0 +1,10 @@
+#Any name can be given
+name: AndroidBuild
+on:
+  push:
+    branches: [ master ]
+
+#jobs:
+#  build:
+#    runs-on: windows-latest
+#    steps:
