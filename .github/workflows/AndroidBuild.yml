@@ -19,10 +19,10 @@ jobs:
           distribution: 'adopt'
 
       - name: Build With Gradle
-        run : ./gradlew build
+        run: ./gradlew build
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.1.3
         with:
           name: debug.apk
-          path: app/build/outputs/apk/app-debug.apk
+          path: app/build/outputs/apk/debug/app-debug.apk
