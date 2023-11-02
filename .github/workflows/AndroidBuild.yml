@@ -3,7 +3,7 @@ name: AndroidBuild
 
 on:
   push:
-    branches: [ master ]
+    branches: [ ci_cd ]
 
 jobs:
   build:
@@ -14,6 +14,9 @@ jobs:
 
       - name: Setup Java JDK
         uses: actions/setup-java@v3.13.0
+        with:
+          java-version: '17'
+          distribution: 'adopt'
 
       - name: Build With Gradle
         run : ./gradlew build
