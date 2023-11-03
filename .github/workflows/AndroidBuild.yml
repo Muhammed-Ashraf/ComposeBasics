@@ -1,6 +1,13 @@
 #Any name can be given
 name: AndroidBuild
 
+env:
+  # The name of the main module repository
+  main_project_module: app
+
+  # The name of the Play Store
+#  playstore_name: MY-Project
+
 on:
   push:
     branches: [ ci_cd ]
@@ -12,17 +19,42 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.1.1
 
+      # Set Current Date As Env Variable
+      - name: Set current date as env variable
+        run: echo "date_today=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+
       - name: Setup Java JDK
         uses: actions/setup-java@v3.13.0
         with:
           java-version: '17'
           distribution: 'adopt'
 
+      # Run Tests Build
+      - name: Run gradle tests
+        run: ./gradlew test
+
+      # Run Build Project
+      - name: Build gradle project
+        run: ./gradlew build
+
       - name: Build With Gradle
         run: ./gradlew assembleDebug
 
-      - name: Upload a Build Artifact
+#     # Create APK Release
+#      - name: Build apk release project (APK) - ${{ env.main_project_module }} module
+#        run: ./gradlew assemble
+
+
+#       # Create Bundle AAB Release
+#      # Noted for main module build [main_project_module]:bundleRelease
+#      - name: Build app bundle release (AAB) - ${{ env.main_project_module }} module
+#        run: ./gradlew ${{ env.main_project_module }}:bundleRelease
+
+      - name: Upload Debug APK
         uses: actions/upload-artifact@v3.1.3
         with:
-          name: new Date().apk
-          path: app/build/outputs/apk/debug/app-debug.apk
+          name: ${{ env.date_today }} - debug.apk
+          path: ${{ env.main_project_module }}/build/outputs/apk/debug/app-debug.apk
+
+#          name: debug.apk
+#          path: app/build/outputs/apk/debug/app-debug.apk
